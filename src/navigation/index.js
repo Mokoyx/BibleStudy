@@ -7,29 +7,31 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import FirstScreen from "../tab/FirstScreen";
 import SecondScreen from "../tab/SecondScreen";
 import ThirdScreen from "../tab/ThirdScreen";
+import FirstScreenDetails from "../screens/firststackscreens/FirstScreenDetails";
 
-
-const Stack = createNativeStackNavigator();
+//constants to enable the tab navigation
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
-const Navigation = () => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Home" component={TabNavigator} />
-      </Stack.Navigator>
-    </NavigationContainer>
+//stack screen to 
+function StackGroup(){
+  return(
+    <Stack.Navigator>
+      <Stack.Screen name="FirstScreen" component={FirstScreen}/>
+      <Stack.Screen name="FirstScreenDetails" component={FirstScreenDetails}/>
+    </Stack.Navigator>
   );
-};
-function TabNavigator({ navigation }) {
+}
+
+//Bottom Tab Navigator
+function TabGroup({ navigation }) {
     return (
       <Tab.Navigator
-        initialRouteName="Map"
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
             let rn = route.name;
-            if (rn === "FirstScreen") {
+            if (rn === "StackGroup") {
               iconName = focused ? "home" : "home-outline";
             } else if (rn === "SecondScreen") {
               iconName = focused ? "journal" : "journal-outline";
@@ -48,10 +50,18 @@ function TabNavigator({ navigation }) {
           },
         })}
       >
-        <Tab.Screen name="FirstScreen" component={FirstScreen} />
-        <Tab.Screen name="SecondScreen" component={SecondScreen} />
-        <Tab.Screen name="ThirdScreen" component={ThirdScreen} />
+        <Tab.Screen name="StackGroup" component={StackGroup} options={{headerShown:false}} />
+        <Tab.Screen name="SecondScreen" component={SecondScreen} options={{headerShown:true}}/>
+        <Tab.Screen name="ThirdScreen" component={ThirdScreen} options={{headerShown:true}} />
       </Tab.Navigator>
     );
   }
-  export default Navigation;
+
+  export default function Navigation(){
+    return(
+      <NavigationContainer>
+        <TabGroup/>
+      </NavigationContainer>
+
+    );
+  }

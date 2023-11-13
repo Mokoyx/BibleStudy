@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
-import { SafeAreaView, StyleSheet, Text } from "react-native";
-import TabNavigator from "./src/navigation";
+import "react-native-gesture-handler";
+import React from "react";
+import { SafeAreaView, StyleSheet } from "react-native";
+import Navigation from "./src/navigation";
 
 const App = () => {
   return (
     <SafeAreaView style={styles.root}>
-      <TabNavigator />
+      <Navigation/>
     </SafeAreaView>
   );
 };
